@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cronograma 2ª Fase Trabalho · Master5 OAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#15172B; --orange:#D7683D; --blue:#8896BE; --sand:#E8A062; --paper:#F3F1EF;
+    --white:#FFFFFF; --muted:#5E6176; --line:#DDD8D2; --soft:#E9E6F0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:'Poppins',system-ui,sans-serif;font-size:15px;line-height:1.55}
+  h1,h2,h3{font-family:'Georgia Pro',Georgia,'Times New Roman',serif;font-weight:700;margin:0;letter-spacing:-.01em}
+  .wrap{max-width:920px;margin:0 auto;padding:0 16px}
+
+  header.top{background:var(--navy);color:var(--white)}
+  header.top .wrap{display:flex;align-items:center;gap:12px;padding-top:14px;padding-bottom:14px}
+  header.top svg{width:40px;height:40px;flex:none}
+  .brand b{display:block;font-family:Georgia,serif;font-size:18px;letter-spacing:.01em}
+  .brand span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sand)}
+
+  .hero{padding:40px 0 24px}
+  .hero h1{font-size:clamp(28px,5vw,40px);line-height:1.15;max-width:640px}
+  .hero h1 em{font-style:normal;color:var(--orange)}
+  .hero p{color:var(--muted);max-width:600px;margin:12px 0 0}
+
+  .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:16px}
+  .step{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+  .step i{font-style:normal;font-family:Georgia,serif;font-weight:700;color:var(--orange);font-size:20px}
+  .step h2{font-size:20px}
+  .step small{display:block;color:var(--muted);font-size:13px;font-family:'Poppins',sans-serif;font-weight:400;margin-top:2px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  label{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+  input,select{width:100%;font:inherit;color:var(--navy);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+  input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(136,150,190,.25)}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px}
+
+  .days-pick{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .days-pick div{text-align:center}
+  .days-pick label{text-align:center;margin-bottom:4px}
+  .days-pick select{padding:9px 4px;text-align:center}
+  .weekly{margin-top:12px;font-size:13px;color:var(--muted)}
+  .weekly b{color:var(--navy)}
+
+  .mat-list{display:grid;gap:8px}
+  .mat{display:grid;grid-template-columns:1fr 200px;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .mat:last-child{border-bottom:0}
+  .mat .nm{font-weight:500}
+  .mat .pw{font-size:12px;color:var(--muted)}
+
+  .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 40px}
+  button{font:inherit;font-weight:600;border-radius:10px;padding:12px 20px;cursor:pointer;border:1px solid var(--navy)}
+  .btn-main{background:var(--navy);color:var(--white)}
+  .btn-main:hover{background:#25284a}
+  .btn-orange{background:var(--orange);border-color:var(--orange);color:var(--white)}
+  .btn-orange:hover{background:#c55a31}
+  .btn-ghost{background:transparent;color:var(--navy)}
+  .err{color:#B23A1E;font-size:14px;font-weight:500}
+
+  #resultado{display:none;padding-bottom:60px}
+  .res-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin:8px 0 18px}
+  .res-head h2{font-size:28px}
+  .res-head p{margin:4px 0 0;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+  .stat{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .stat b{display:block;font-family:Georgia,serif;font-size:26px}
+  .stat span{font-size:13px;color:var(--muted)}
+
+  .bars{display:grid;gap:10px}
+  .bar-row{display:grid;grid-template-columns:minmax(120px,240px) 1fr 70px;gap:10px;align-items:center;font-size:14px}
+  .bar{height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--blue);border-radius:6px}
+  .bar-row.fraca .bar i{background:var(--orange)}
+  .bar-row .hh{text-align:right;color:var(--muted)}
+
+  .metodo{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .metodo h3{font-size:16px;margin-bottom:6px}
+  .metodo ol,.metodo ul{margin:0;padding-left:18px;font-size:14px}
+  .metodo li{margin-bottom:4px}
+  .metodo .k{color:var(--orange);font-weight:600}
+
+  details.week{background:var(--white);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  details.week summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+  details.week summary::-webkit-details-marker{display:none}
+  details.week summary b{font-family:Georgia,serif;font-size:17px}
+  details.week summary .dt{color:var(--muted);font-size:13px}
+  details.week summary .hw{margin-left:auto;font-size:13px;color:var(--muted)}
+  details.week[open] summary{border-bottom:1px solid var(--line)}
+  .tag{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:20px;border:1px solid var(--orange);color:var(--orange)}
+  .day{display:grid;grid-template-columns:110px 1fr 1fr;gap:14px;padding:12px 18px;border-bottom:1px dashed var(--line);font-size:14px}
+  .day:last-child{border-bottom:0}
+  .day .dn b{display:block}
+  .day .dn span{color:var(--muted);font-size:12px}
+  .day h4{margin:0 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .blk{margin-bottom:3px}
+  .blk em{font-style:normal;color:var(--muted);font-size:12px}
+  .day.folga{color:var(--muted);background:#FAF9F7}
+  .day.simulado,.day.correcao{background:#FBF4F0}
+  .day.revisao{background:#F1F3F9}
+  .day .mt{font-weight:600}
+  .day ol.passos{margin:0;padding-left:18px}
+  .day ol.passos li{margin-bottom:2px}
+  .day ol.passos em,.day .note{font-style:normal;color:var(--muted);font-size:12px}
+  .wk-mats{flex-basis:100%;font-size:13px;color:var(--muted)}
+  .tops{margin:6px 0 0;padding:0;list-style:none}
+  .tops li{position:relative;padding-left:14px;margin-bottom:3px;font-size:13.5px;line-height:1.4}
+  .tops li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+  .tag-ref{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);margin-left:6px}
+  .rev-m{margin-bottom:6px}
+  details.week summary .wk-mats b{font-family:'Poppins',sans-serif;font-size:13px;color:var(--navy);font-weight:500}
+  .rev-item{margin-bottom:2px}
+  .rev-item em{font-style:normal;font-size:12px;color:var(--blue);font-weight:600}
+
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:24px 0 40px}
+
+  @media (max-width:640px){
+    .card{padding:18px}
+    .days-pick{grid-template-columns:repeat(4,1fr)}
+    .mat{grid-template-columns:1fr}
+    .day{grid-template-columns:1fr;gap:8px}
+    .bar-row{grid-template-columns:1fr 60px}
+    .bar-row .bar{grid-column:1 / -1;grid-row:2}
+  }
+</style>
+</head>
+<body>
+<div id="jsErro" style="display:none;background:#B23A1E;color:#fff;padding:10px 16px;font:14px/1.4 sans-serif"></div>
+<script>window.addEventListener('error', function(ev){ var d = document.getElementById('jsErro'); if(d){ d.style.display = 'block'; d.textContent = 'A página encontrou um erro. Mande um print desta mensagem para a Sa: ' + ev.message + ' (linha ' + ev.lineno + ')'; } });</script>
+
+<header class="top">
+  <div class="wrap">
+    <span id="logoTop"></span>
+    <div class="brand"><b>Master5 OAB</b><span>Cronograma 2ª fase · Trabalho</span></div>
+  </div>
+</header>
+
+<div class="wrap" id="iframeNotice" style="display:none;margin-top:16px"><div class="notice" style="background:#F1F3F9;border:1px solid #D9DEEC;border-radius:12px;padding:12px 16px;font-size:14px">Você está usando a plataforma dentro da área de alunos. Se o botão de baixar o PDF não funcionar, <a href="https://questoes.oabdescomplicada.com.br/cronograma-2fase-trabalho/" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600">abra a plataforma em uma nova aba</a>.</div></div>
+<main class="wrap">
+  <section class="hero">
+    <h1>Seu cronograma da 2ª fase de Trabalho, montado para a <em>sua</em> rotina.</h1>
+    <p>Informe a data da prova, o tempo que você tem e como está em cada matéria. O cronograma distribui o estudo pelo peso de cada disciplina na prova, reforça o que você tem mais dificuldade e já encaixa as revisões no tempo certo.</p>
+  </section>
+
+  <form id="form" autocomplete="off">
+    <div class="card">
+      <div class="step"><i>1</i><h2>Seus dados</h2></div>
+      <div class="grid">
+        <div><label for="nome">Seu nome</label><input id="nome" placeholder="Como quer que apareça no PDF"></div>
+        <div><label for="concurso">Fase</label><select id="concurso" disabled></select></div>
+        <div><label for="cargo">Área</label><select id="cargo" disabled></select></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><i>2</i><h2>Datas<small>Use a data da prova do seu exame. Se ainda não saiu o edital, use uma data estimada e gere de novo quando sair.</small></h2></div>
+      <div class="grid">
+        <div><label for="inicio">Começo a estudar em</label><input type="date" id="inicio"></div>
+        <div><label for="prova">Data da prova</label><input type="date" id="prova"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><i>3</i><h2>Seu tempo disponível<small>Horas líquidas de estudo em cada dia. Domingo é o dia do simulado (a prova dura 5h) e segunda é o dia de corrigir o simulado e revisar. Seja realista: um plano possível vale mais que um plano perfeito.</small></h2></div>
+      <div class="days-pick" id="daysPick"></div>
+      <div class="weekly" id="weekly"></div>
+    </div>
+
+    <div class="card">
+      <div class="step"><i>4</i><h2>Como você está em cada matéria<small>Matérias em que você tem dificuldade ganham mais tempo. As que você domina continuam no plano, com menos horas.</small></h2></div>
+      <div class="mat-list" id="matList"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-main" id="btnGerar">Gerar meu cronograma</button>
+      <span class="err" id="err"></span>
+    </div>
+  </form>
+
+  <section id="resultado">
+    <div class="res-head">
+      <div>
+        <h2>Seu cronograma</h2>
+        <p id="resSub"></p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" class="btn-ghost" id="btnEditar">Ajustar dados</button>
+        <button type="button" class="btn-orange" id="btnPdf">Baixar PDF</button>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="card">
+      <div class="step"><i>·</i><h2>Como seu tempo foi distribuído</h2></div>
+      <div class="bars" id="bars"></div>
+    </div>
+
+    <div class="card">
+      <div class="step"><i>·</i><h2>Como funciona a sua semana</h2></div>
+      <div class="metodo">
+        <div>
+          <h3>Dia de peça</h3>
+          <ol>
+            <li>Aula prática e estrutura da peça (passo a passo)</li>
+            <li>Peça à mão, cronometrada</li>
+            <li>Correção com o espelho e caderno de erros</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Dia de teoria</h3>
+          <ol>
+            <li>Leitura da CLT e das súmulas e OJs do TST do tema</li>
+            <li>Questões discursivas por escrito, sempre com fundamento</li>
+            <li>Correção com o espelho e caderno de erros</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Domingo e segunda</h3>
+          <ul>
+            <li><b>Domingo:</b> simulado completo, peça e 4 questões, em 5h</li>
+            <li><b>Segunda:</b> correção do simulado com o espelho e revisão das teses da semana anterior</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="weeks"></div>
+  </section>
+</main>
+
+<footer>Master5 OAB · Cronograma 2ª fase Trabalho · versão 05/11</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO DOS CONCURSOS — edite aqui
+   Cada matéria: ['Nome da matéria', peso]
+   Peso = número de questões da disciplina na prova (total de 80).
+   Para incluir um concurso novo, copie um bloco e mude os nomes.
+   ===================================================================== */
+const CONCURSOS = {
+  F2: {
+    nome: '2ª fase · Prova prático-profissional',
+    cargos: {
+      trabalho: { nome: 'Direito do Trabalho · peça (5 pontos) + 4 questões (1,25 cada)', unidade: null,
+        simulado: ['Simulado completo: peça + 4 questões discursivas, em 5h', 'À mão e no tempo real de prova. A correção com o espelho é amanhã, na segunda.'],
+        reta: 'treino com tempo + revisão',
+        materias: [
+        ['Peças processuais',3],['Direito Processual do Trabalho',2],['Direito Material do Trabalho',2]
+      ]}
+    }
+  }
+};
+
+/* =====================================================================
+   TÓPICOS MAIS COBRADOS — em ordem de prioridade (o mais cobrado primeiro)
+   O cronograma distribui os tópicos pelos dias de cada matéria, nesta ordem.
+   Edite à vontade: o nome da matéria precisa ser igual ao da lista acima.
+   ===================================================================== */
+const TOPICOS = {
+  'Peças processuais': [
+    'Reclamação trabalhista (rito ordinário, sumaríssimo e com tutela de urgência)',
+    'Contestação (inclusive contestação com reconvenção)',
+    'Recurso ordinário',
+    'Embargos à execução',
+    'Agravo de petição',
+    'Recurso de revista',
+    'Embargos de declaração',
+    'Agravo de instrumento',
+    'Mandado de segurança',
+    'Ação de consignação em pagamento',
+    'Inquérito para apuração de falta grave',
+    'Embargos de terceiro',
+    'Contrarrazões'
+  ],
+  'Direito Processual do Trabalho': [
+    'Recursos: pressupostos, prazos, custas e depósito recursal',
+    'Execução: liquidação, garantia do juízo, embargos e agravo de petição',
+    'Prescrição bienal e quinquenal (sempre com a data exata)',
+    'Competência da Justiça do Trabalho',
+    'Preliminares e preliminar de mérito (art. 337 do CPC)',
+    'Reconvenção (art. 343 do CPC)',
+    'Procedimentos ordinário e sumaríssimo, audiência e revelia',
+    'Tutela de urgência (art. 300 do CPC)',
+    'Honorários de sucumbência e justiça gratuita (art. 791-A da CLT)',
+    'Provas e ônus da prova',
+    'Ação rescisória e mandado de segurança',
+    'Nulidades e incidente de desconsideração da personalidade jurídica'
+  ],
+  'Direito Material do Trabalho': [
+    'Jornada: horas extras, intervalos, banco de horas e teletrabalho',
+    'Verbas rescisórias, justa causa e rescisão indireta',
+    'Remuneração, salário e equiparação salarial',
+    'Adicionais: insalubridade, periculosidade e noturno',
+    'Estabilidades e garantias de emprego',
+    'Terceirização, grupo econômico e sucessão de empregadores',
+    'Dano extrapatrimonial e assédio',
+    'Férias, 13º salário e FGTS',
+    'Contrato de trabalho: requisitos, alteração, suspensão e interrupção',
+    'Trabalho da mulher, do menor e contrato intermitente'
+  ]
+};
+
+/* Grupos que aparecem no seletor de concurso */
+const GRUPOS = { tribunal: 'Exame de Ordem' };
+const SIMULADO_TODO_DOMINGO = true;   // 2ª fase: simulado toda semana (correção na segunda)
+
+/* Regras do método (ajuste se quiser) */
+/* Data da prova que já vem preenchida (próximo exame). Atualize a cada exame: 'AAAA-MM-DD' */
+const DATA_PROVA_PADRAO = '2027-02-28';  // 2ª fase do 48º Exame de Ordem
+
+const REGRAS = {
+  fatorNivel: { fraca: 1.5, media: 1, forte: 0.6 },  // quanto cada nível pesa no tempo
+  revisaoNormal: 0.3,       // 30% do dia para revisão
+  revisaoRetaFinal: 0.5,    // 50% do dia para revisão na reta final
+  simuladoACadaSemanas: 4,  // 1 simulado a cada 4 semanas (toda semana na reta final)
+  revisoes: [[1,'24h'],[7,'7 dias'],[30,'30 dias']]
+};
+/* ===================================================================== */
+
+const NIVEIS = [['fraca','Tenho dificuldade'],['media','Mais ou menos'],['forte','Domino bem'],['fora','Não vou estudar']];
+const NIVEL_TXT = {fraca:'Dificuldade', media:'Médio', forte:'Domina'};
+const DIAS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const DIAS_LONGOS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const ORDEM = [1,2,3,4,5,6,0];
+const HORAS_PADRAO = {0:5,1:2,2:2,3:2,4:2,5:2,6:3};
+const STORE_KEY = 'm5oab-2fase-trabalho-v1';
+
+const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
+ + '<path d="M35.6 16.5 A42 42 0 1 0 64.4 16.5" fill="none" stroke="#D7683D" stroke-width="5" stroke-linecap="round"/>'
+ + '<ellipse cx="43" cy="12" rx="8" ry="3.6" transform="rotate(-28 43 12)" fill="#D7683D"/>'
+ + '<ellipse cx="57" cy="12" rx="8" ry="3.6" transform="rotate(28 57 12)" fill="#D7683D"/>'
+ + '<circle cx="50" cy="56" r="31" fill="#D7683D"/>'
+ + '<g transform="rotate(45 50 56)" fill="#15172B"><rect x="45" y="36" width="10" height="40" rx="2"/><rect x="30" y="51" width="40" height="10" rx="2"/></g>'
+ + '<circle cx="50" cy="56" r="3.5" fill="#D7683D"/>'
+ + '<g stroke="#F3F1EF" stroke-width="2.5" stroke-linecap="round"><line x1="50" y1="40" x2="50" y2="45"/><line x1="50" y1="67" x2="50" y2="72"/><line x1="34" y1="56" x2="39" y2="56"/><line x1="61" y1="56" x2="66" y2="56"/></g>'
+ + '</svg>';
+
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,'0');
+const toISO = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parseISO = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y,m-1,d); };
+const addDays = (d,n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+const ddmm = d => pad(d.getDate())+'/'+pad(d.getMonth()+1);
+const ddmmyyyy = d => ddmm(d)+'/'+d.getFullYear();
+const roundHalf = x => Math.round(x*2)/2;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fmtH(h){
+  const H = Math.floor(h+1e-9), M = Math.round((h-H)*60);
+  if(!H) return M+'min';
+  return M ? H+'h'+pad(M) : H+'h';
+}
+function diffDays(a,b){ return Math.round((b - a)/86400000); }
+
+/* ---------- motor do cronograma ----------
+   Semana de segunda a domingo:
+   - Segunda: revisão das matérias estudadas na semana anterior
+   - Terça a sábado: estudo de 2 ou 3 matérias (legislação > questões > caderno de erros)
+   - Domingo: simulado e correção aprofundada, intercalados
+   ------------------------------------------------- */
+window.PASSOS_T = [['Leitura da CLT e súmulas/OJs do TST do tema',0.35],['Questões discursivas por escrito, com fundamento',0.45],['Correção com o espelho + caderno de erros',0.20]];
+const PASSOS_PECA = [['Aula prática e estrutura da peça (passo a passo)',0.25],['Peça à mão, cronometrada',0.50],['Correção com o espelho + caderno de erros',0.25]];
+function splitDay(H, nome){
+  const PASSOS = nome === 'Peças processuais' ? PASSOS_PECA : window.PASSOS_T;
+  const tot = Math.round(H*60), r10 = x => Math.max(10, Math.round(x/10)*10);
+  const leg = r10(tot*PASSOS[0][1]), err = r10(tot*PASSOS[2][1]);
+  return [[PASSOS[0][0], leg/60], [PASSOS[1][0], Math.max(10, tot-leg-err)/60], [PASSOS[2][0], err/60]];
+}
+function generatePlan(cfg){
+  const F = REGRAS.fatorNivel;
+  const subs = cfg.materias.filter(m => m.nivel !== 'fora')
+    .map(m => ({nome:m.nome, nivel:m.nivel, peso:m.peso, w:m.peso*F[m.nivel], h:0, dias:0}));
+  const W = subs.reduce((a,s) => a+s.w, 0);
+  const totalDays = diffDays(cfg.start, cfg.end);
+  const hrs = d => cfg.hours[d.getDay()] || 0;
+
+  const wks = []; let cur = null;
+  for(let i=0;i<totalDays;i++){
+    const date = addDays(cfg.start, i);
+    if(!cur || date.getDay() === 1){ cur = []; wks.push(cur); }
+    cur.push(date);
+  }
+
+  let assigned = 0, simulados = 0, totalH = 0, revH = 0, simH = 0, domingos = 0, lastSim = null;
+  let prevMats = [];
+  const weeks = wks.map((dates, wi) => {
+    const avail = dates.filter(d => hrs(d) > 0);
+    const revDate = prevMats.length ? (avail.find(d => d.getDay() === 1) || avail[0] || null) : null;
+    const rest = avail.filter(d => d !== revDate);
+    let wkDate = rest.find(d => d.getDay() === 0) || null;
+    if(!wkDate && dates.length === 7 && rest.length >= 3) wkDate = rest[rest.length-1];
+    const studyDates = rest.filter(d => d !== wkDate);
+
+    // escolhe 2 ou 3 matérias da semana (as mais "atrasadas" em relação ao peso)
+    const weekH = studyDates.reduce((a,d) => a+hrs(d), 0);
+    const k = Math.min(studyDates.length, studyDates.length >= 5 ? 3 : 2);
+    const chosen = [...subs].sort((a,b) => (b.w/W*(assigned+weekH) - b.h) - (a.w/W*(assigned+weekH) - a.h)).slice(0,k);
+    const counts = new Map(chosen.map(s => [s,0])), tmpH = new Map(chosen.map(s => [s,s.h]));
+    let tmpA = assigned;
+    studyDates.forEach((d,i) => {
+      let pick = chosen[i];
+      if(i >= chosen.length){ let best = -Infinity; chosen.forEach(s => { const def = s.w/W*(tmpA+hrs(d)) - tmpH.get(s); if(def > best){ best = def; pick = s; } }); }
+      counts.set(pick, counts.get(pick)+1); tmpH.set(pick, tmpH.get(pick)+hrs(d)); tmpA += hrs(d);
+    });
+    const seq = []; chosen.forEach(s => { for(let j=0;j<counts.get(s);j++) seq.push(s); });
+    const plan = new Map(studyDates.map((d,i) => [d, seq[i]]));
+
+    const days = []; let wh = 0; const estudadas = [];
+    dates.forEach(date => {
+      const H = hrs(date);
+      if(!H){ days.push({date, H:0, tipo:'folga'}); return; }
+      wh += H; totalH += H;
+      if(date === revDate){ revH += H; days.push({date, H, tipo:'revisao', mats:prevMats}); return; }
+      if(date === wkDate){
+        simH += H;
+        if(SIMULADO_TODO_DOMINGO || domingos % 2 === 0){ simulados++; lastSim = date; days.push({date, H, tipo:'simulado'}); }
+        else days.push({date, H, tipo:'correcao', ref:lastSim});
+        domingos++; return;
+      }
+      const s = plan.get(date);
+      s.h += H; s.dias++; assigned += H;
+      if(!estudadas.includes(s.nome)) estudadas.push(s.nome);
+      days.push({date, H, tipo:'estudo', nome:s.nome, n:s.dias, passos:splitDay(H, s.nome)});
+    });
+    prevMats = estudadas;
+    return {n:wi+1, start:dates[0], end:dates[dates.length-1], days, h:wh, mats:estudadas};
+  });
+  // distribui os tópicos (do mais cobrado para o menos) pelos dias de cada matéria
+  const porMateria = {};
+  weeks.forEach(w => w.days.forEach(d => { if(d.tipo === 'estudo') (porMateria[d.nome] = porMateria[d.nome] || []).push(d); }));
+  Object.entries(porMateria).forEach(([nome, dias]) => {
+    const T = TOPICOS[nome] || [], n = dias.length;
+    dias.forEach((d,i) => {
+      d.total = n;
+      if(!T.length){ d.topicos = []; return; }
+      if(n >= T.length){ d.topicos = [T[i % T.length]]; d.reforco = i >= T.length; }
+      else { const C = Math.min(T.length, n*2); d.topicos = T.slice(Math.floor(i*C/n), Math.floor((i+1)*C/n)); }  // no máximo 2 tópicos por dia; com pouco tempo, ficam os mais cobrados
+    });
+  });
+  // a revisão de segunda lista os tópicos estudados na semana anterior
+  weeks.forEach((w,wi) => w.days.forEach(d => {
+    if(d.tipo !== 'revisao' || !wi) return;
+    const g = new Map();
+    weeks[wi-1].days.filter(x => x.tipo === 'estudo').forEach(x => { if(!g.has(x.nome)) g.set(x.nome, []); g.get(x.nome).push(...x.topicos); });
+    d.itens = [...g].map(([nome, tops]) => ({nome, tops:[...new Set(tops)]}));
+  }));
+  return {weeks, subs, assigned, simulados, nWeeks:weeks.length, totalH, revH, simH};
+}
+
+/* ---------- formulário ---------- */
+let PLAN = null, LAST = null;
+
+function loadSaved(){ try { return JSON.parse(localStorage.getItem(STORE_KEY)) || null; } catch(e){ return null; } }
+function save(data){ try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch(e){} }
+const saved = loadSaved();
+
+function fillConcursos(){
+  const sel = $('#concurso');
+  sel.innerHTML = Object.entries(GRUPOS).map(([gk,gn]) => {
+    const itens = Object.entries(CONCURSOS).filter(([,c]) => (c.grupo || 'tribunal') === gk);
+    if(!itens.length) return '';
+    return `<optgroup label="${esc(gn)}">` + itens.map(([k,c]) => `<option value="${k}">${esc(c.nome)}</option>`).join('') + '</optgroup>';
+  }).join('');
+  if(saved && CONCURSOS[saved.concurso]) sel.value = saved.concurso;
+  fillCargos(saved && saved.cargo);
+}
+function fillCargos(pref){
+  const c = CONCURSOS[$('#concurso').value];
+  const sel = $('#cargo');
+  sel.innerHTML = Object.entries(c.cargos).map(([k,g]) => `<option value="${k}">${esc(g.nome)}</option>`).join('');
+  if(pref && c.cargos[pref]) sel.value = pref;
+  fillMaterias();
+}
+function fillMaterias(){
+  const g = CONCURSOS[$('#concurso').value].cargos[$('#cargo').value];
+  const prev = {};
+  document.querySelectorAll('#matList select').forEach(s => prev[s.dataset.nome] = s.value);
+  const savedN = (saved && saved.niveis) || {};
+  $('#matList').innerHTML = g.materias.map(([nome,peso]) => {
+    const v = prev[nome] || savedN[nome] || 'media';
+    const un = g.unidade; const pw = un ? `${peso} ${un} na prova` : (peso >= 3 ? 'Peso alto na prova' : peso === 2 ? 'Peso médio na prova' : 'Peso menor na prova');
+    return `<div class="mat"><div><div class="nm">${esc(nome)}</div><div class="pw">${pw}</div></div>
+      <select data-nome="${esc(nome)}" data-peso="${peso}" aria-label="Nível em ${esc(nome)}">
+        ${NIVEIS.map(([k,t]) => `<option value="${k}"${k===v?' selected':''}>${t}</option>`).join('')}
+      </select></div>`;
+  }).join('');
+}
+function fillDays(){
+  const opts = [];
+  for(let h=0; h<=10; h+=0.5) opts.push(h);
+  $('#daysPick').innerHTML = ORDEM.map(d => {
+    const v = saved && saved.hours ? saved.hours[d] : HORAS_PADRAO[d];
+    return `<div><label for="h${d}">${DIAS[d]}</label><select id="h${d}" data-dia="${d}">
+      ${opts.map(h => `<option value="${h}"${h===v?' selected':''}>${h ? fmtH(h) : 'folga'}</option>`).join('')}
+    </select></div>`;
+  }).join('');
+  updateWeekly();
+}
+function readHours(){ const h = {}; document.querySelectorAll('#daysPick select').forEach(s => h[s.dataset.dia] = Number(s.value)); return h; }
+function updateWeekly(){
+  const h = readHours(); const t = Object.values(h).reduce((a,b) => a+b, 0);
+  $('#weekly').innerHTML = t ? `Total por semana: <b>${fmtH(t)}</b>` : 'Escolha pelo menos um dia com horas de estudo.';
+}
+
+function init(){
+  $('#logoTop').innerHTML = LOGO_SVG;
+  fillConcursos();
+  fillDays();
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  $('#inicio').value = (saved && saved.inicio) || toISO(hoje);
+  const padrao = parseISO(DATA_PROVA_PADRAO);
+  $('#prova').value = (saved && saved.prova && parseISO(saved.prova) > hoje) ? saved.prova : (padrao > addDays(hoje, 7) ? DATA_PROVA_PADRAO : toISO(addDays(hoje, 7*16)));
+  $('#nome').value = (saved && saved.nome) || '';
+  $('#concurso').addEventListener('change', () => fillCargos());
+  $('#cargo').addEventListener('change', fillMaterias);
+  $('#daysPick').addEventListener('change', updateWeekly);
+  $('#form').addEventListener('submit', onGenerate);
+  $('#btnGerar').addEventListener('click', onGenerate);
+  $('#btnEditar').addEventListener('click', () => $('#form').scrollIntoView({behavior:'smooth'}));
+  $('#btnPdf').addEventListener('click', baixarPDF);
+}
+
+function onGenerate(ev){
+  if(ev) ev.preventDefault();
+  const err = $('#err'); err.textContent = '';
+  const inicio = $('#inicio').value, prova = $('#prova').value;
+  if(!inicio || !prova){ err.textContent = 'Preencha as duas datas.'; return; }
+  const start = parseISO(inicio), end = parseISO(prova);
+  const dd = diffDays(start, end);
+  if(dd < 7){ err.textContent = 'A prova precisa estar pelo menos 7 dias depois do início.'; return; }
+  if(dd > 730){ err.textContent = 'O cronograma vai até 2 anos. Ajuste a data da prova.'; return; }
+  const hours = readHours();
+  if(!Object.values(hours).some(h => h > 0)){ err.textContent = 'Escolha pelo menos um dia com horas de estudo.'; return; }
+  const materias = [...document.querySelectorAll('#matList select')].map(s => ({nome:s.dataset.nome, peso:Number(s.dataset.peso), nivel:s.value}));
+  if(!materias.some(m => m.nivel !== 'fora')){ err.textContent = 'Deixe pelo menos uma matéria no plano.'; return; }
+
+  const c = CONCURSOS[$('#concurso').value], g = c.cargos[$('#cargo').value];
+  LAST = { nome: $('#nome').value.trim(), concurso: c.nome, cargo: g.nome, sim: g.simulado, reta: g.reta, start, end, hours, materias };
+  save({ nome:LAST.nome, concurso:$('#concurso').value, cargo:$('#cargo').value, inicio, prova, hours,
+         niveis:Object.fromEntries(materias.map(m => [m.nome, m.nivel])) });
+  PLAN = generatePlan(LAST);
+  render();
+}
+
+/* ---------- visualização ---------- */
+function render(){
+  const P = PLAN, L = LAST;
+  $('#resSub').textContent = `${L.nome ? L.nome+' · ' : ''}${L.concurso} · ${L.cargo} · prova em ${ddmmyyyy(L.end)}`;
+  const semanal = Object.values(L.hours).reduce((a,b) => a+b, 0);
+  $('#stats').innerHTML = [
+    [P.nWeeks, P.nWeeks === 1 ? 'semana até a prova' : 'semanas até a prova'],
+    [fmtH(P.totalH), 'de estudo no total'],
+    [fmtH(semanal), 'por semana'],
+    [P.simulados, P.simulados === 1 ? 'simulado programado' : 'simulados programados']
+  ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
+
+  const max = Math.max(...P.subs.map(s => s.h), 1);
+  $('#bars').innerHTML = [...P.subs].sort((a,b) => b.h - a.h).map(s =>
+    `<div class="bar-row ${s.nivel}"><span>${esc(s.nome)}</span><div class="bar"><i style="width:${(s.h/max*100).toFixed(1)}%"></i></div><span class="hh">${fmtH(s.h)}</span></div>`
+  ).join('') + `<div class="hint" style="margin-top:4px">Em laranja, o que você marcou como dificuldade. Além dessas horas, ${fmtH(P.revH)} ficam para a correção e a revisão de segunda e ${fmtH(P.simH)} para os simulados de domingo.</div>`;
+
+  $('#weeks').innerHTML = P.weeks.map((w,i) => `
+    <details class="week"${i < 2 ? ' open' : ''}>
+      <summary><b>Semana ${w.n}</b><span class="dt">${ddmm(w.start)} a ${ddmm(w.end)}</span><span class="hw">${fmtH(w.h)}</span>${w.mats.length ? `<span class="wk-mats">Foco da semana: <b>${w.mats.map(esc).join(' · ')}</b></span>` : ''}</summary>
+      ${w.days.map(dayHTML).join('')}
+    </details>`).join('');
+
+  const r = $('#resultado'); r.style.display = 'block';
+  r.scrollIntoView({behavior:'smooth'});
+}
+function dayHTML(d){
+  const head = `<div class="dn"><b>${DIAS_LONGOS[d.date.getDay()]}</b><span>${ddmm(d.date)}${d.H ? ' · '+fmtH(d.H) : ''}</span></div>`;
+  if(d.tipo === 'folga') return `<div class="day folga">${head}<div>Descanso</div><div></div></div>`;
+  if(d.tipo === 'simulado') return `<div class="day simulado">${head}<div><h4>Simulado</h4><div class="mt">${esc(LAST.sim[0])}</div></div><div><h4>Como fazer</h4>${esc(LAST.sim[1])}</div></div>`;
+  if(d.tipo === 'correcao') return `<div class="day correcao">${head}<div><h4>Correção aprofundada</h4><div class="mt">Simulado de ${ddmm(d.ref)}</div></div><div><h4>Como fazer</h4>Refaça cada questão errada, classifique o erro (conteúdo, interpretação ou pressa) e anote no caderno de erros.</div></div>`;
+  if(d.tipo === 'revisao') return `<div class="day revisao">${head}<div><h4>Correção do simulado + revisão</h4><div class="mt">Simulado de domingo, com o espelho</div><div class="note" style="margin:6px 0 4px">Revise também as teses da semana anterior:</div>${(d.itens || d.mats.map(m => ({nome:m, tops:[]}))).map(it => `<div class="rev-m"><div class="mt">${esc(it.nome)}</div>${it.tops.length ? `<ul class="tops">${it.tops.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}</div>`).join('')}</div><div><h4>Como fazer</h4>Corrija o simulado item por item com o espelho e leve para o caderno de erros o que você perdeu. Depois, revise as teses da semana anterior com flashcards e evocação: tente lembrar sem olhar e depois confira.</div></div>`;
+  return `<div class="day">${head}<div><h4>Estudo</h4><div class="mt">${esc(d.nome)}${d.reforco ? '<span class="tag-ref">Reforço</span>' : ''}</div>${d.topicos.length ? `<ul class="tops">${d.topicos.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}<div class="note">Dia ${d.n} de ${d.total} neste bloco</div></div>
+    <div><h4>Passo a passo</h4><ol class="passos">${d.passos.map(([t,h]) => `<li>${esc(t)} <em>· ${fmtH(h)}</em></li>`).join('')}</ol></div></div>`;
+}
+
+/* ---------- PDF ---------- */
+function logoPNG(){
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const c = document.createElement('canvas'); c.width = c.height = 300;
+        c.getContext('2d').drawImage(img, 0, 0, 300, 300);
+        res(c.toDataURL('image/png'));
+      } catch(e){ res(null); }
+    };
+    img.onerror = () => res(null);
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
+  });
+}
+function slug(s){ return (s || 'aluno').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'aluno'; }
+
+async function baixarPDF(){
+  if(!PLAN) return;
+  if(!window.jspdf || !window.jspdf.jsPDF){ alert('Não consegui carregar o gerador de PDF. Confira sua internet e tente de novo.'); return; }
+  const btn = $('#btnPdf'); const txt = btn.textContent; btn.textContent = 'Gerando PDF...'; btn.disabled = true;
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({unit:'mm', format:'a4'});
+    const P = PLAN, L = LAST, PW = 210, M = 14;
+    const NAVY = [21,23,43], ORANGE = [215,104,61], BLUE = [136,150,190], SAND = [232,160,98], PAPER = [243,241,239], MUTED = [94,97,118];
+
+    doc.setFillColor(...NAVY); doc.rect(0,0,PW,36,'F');
+    const logo = await logoPNG();
+    if(logo) doc.addImage(logo,'PNG',M,7,22,22);
+    const tx = logo ? M+28 : M;
+    doc.setTextColor(...SAND); doc.setFont('helvetica','bold'); doc.setFontSize(8.5);
+    doc.text('MASTER5 OAB · 2ª FASE TRABALHO', tx, 14, {charSpace:0.8});
+    doc.setTextColor(255,255,255); doc.setFont('times','bold'); doc.setFontSize(20);
+    doc.text('Cronograma 2ª fase', tx, 23);
+    if(L.nome){ doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.text(L.nome, tx, 30); }
+
+    let y = 46;
+    const semanal = Object.values(L.hours).reduce((a,b) => a+b, 0);
+    doc.setTextColor(...NAVY); doc.setFont('helvetica','bold'); doc.setFontSize(10.5);
+    doc.text(`${L.concurso}  ·  ${L.cargo}`, M, y);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(...MUTED);
+    y += 6; doc.text(`Período: ${ddmmyyyy(L.start)} a ${ddmmyyyy(addDays(L.end,-1))}  ·  Prova: ${ddmmyyyy(L.end)}`, M, y);
+    y += 5; doc.text(`${P.nWeeks} semanas  ·  ${fmtH(semanal)} por semana  ·  ${fmtH(P.totalH)} no total  ·  ${P.simulados} simulados`, M, y);
+    y += 5; doc.text('Rotina: ' + ORDEM.filter(d => L.hours[d]).map(d => `${DIAS[d]} ${fmtH(L.hours[d])}`).join('  ·  '), M, y);
+
+    y += 9;
+    doc.setTextColor(...NAVY); doc.setFont('times','bold'); doc.setFontSize(13);
+    doc.text('Distribuição do tempo', M, y);
+    doc.autoTable({
+      startY: y+3, margin:{left:M,right:M},
+      head: [['Matéria','Seu nível','Horas de estudo','% do estudo']],
+      body: [...P.subs].sort((a,b) => b.h - a.h).map(s => [s.nome, NIVEL_TXT[s.nivel], fmtH(s.h), (P.assigned ? s.h/P.assigned*100 : 0).toFixed(0)+'%']),
+      styles:{font:'helvetica', fontSize:9, cellPadding:2.2, textColor:NAVY, lineColor:[221,216,210], lineWidth:0.2},
+      headStyles:{fillColor:NAVY, textColor:255, fontStyle:'bold'},
+      alternateRowStyles:{fillColor:[250,249,247]},
+      columnStyles:{2:{halign:'right'},3:{halign:'right'}},
+      didParseCell: h => { if(h.section === 'body' && h.column.index === 1 && h.cell.raw === 'Dificuldade') h.cell.styles.textColor = ORANGE; }
+    });
+
+    y = doc.lastAutoTable.finalY + 8;
+    const boxH = 38;
+    if(y + boxH > 280){ doc.addPage(); y = 20; }
+    doc.setFillColor(...PAPER); doc.setDrawColor(...SAND); doc.roundedRect(M, y, PW-2*M, boxH, 2, 2, 'FD');
+    doc.setTextColor(...NAVY); doc.setFont('times','bold'); doc.setFontSize(12);
+    doc.text('Como funciona a sua semana', M+5, y+7);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.2);
+    const colW = (PW-2*M-10)/3;
+    const cols = [
+      ['Dia de peça', ['1. Aula prática e estrutura da peça','2. Peça à mão, cronometrada','3. Correção com espelho + erros']],
+      ['Dia de teoria', ['1. CLT e súmulas/OJs do TST','2. Questões discursivas escritas','3. Correção com espelho + erros']],
+      ['Domingo e segunda', ['Dom: simulado completo (5h)','Seg: correção com o espelho','Seg: revisão das teses']]
+    ];
+    cols.forEach(([t,items],i) => {
+      const x = M+5+i*colW;
+      doc.setFont('helvetica','bold'); doc.setTextColor(...ORANGE); doc.text(t, x, y+14);
+      doc.setFont('helvetica','normal'); doc.setTextColor(...NAVY);
+      items.forEach((it,j) => doc.text(it, x, y+20+j*4.6));
+    });
+    y += boxH + 10;
+
+    P.weeks.forEach(w => {
+      const est = 18 + w.days.filter(d => d.tipo !== 'folga').length*15 + w.days.filter(d => d.tipo === 'folga').length*7;
+      if(y + Math.min(est, 200) > 280){ doc.addPage(); y = 20; }
+      doc.setTextColor(...NAVY); doc.setFont('times','bold'); doc.setFontSize(12.5);
+      doc.text(`Semana ${w.n}`, M, y);
+      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...MUTED);
+      doc.text(`${ddmm(w.start)} a ${ddmm(w.end)}  ·  ${fmtH(w.h)}`, M+24, y);
+      let ty = y;
+      if(w.mats.length){ ty += 5; doc.setFontSize(8.6); doc.text('Foco da semana: ' + w.mats.join('  ·  '), M, ty, {maxWidth: PW-2*M}); }
+
+      const body = w.days.map(d => {
+        const dia = `${DIAS_LONGOS[d.date.getDay()]}\n${ddmm(d.date)}${d.H ? ' · '+fmtH(d.H) : ''}`;
+        if(d.tipo === 'folga') return [dia, 'Descanso', ''];
+        if(d.tipo === 'simulado') return [dia, L.sim[0], L.sim[1]];
+        if(d.tipo === 'correcao') return [dia, `Correção aprofundada do simulado de ${ddmm(d.ref)}`, 'Refaça cada questão errada, classifique o erro (conteúdo, interpretação ou pressa) e anote no caderno de erros.'];
+        if(d.tipo === 'revisao') return [dia, 'Correção do simulado de domingo (com o espelho)\nRevisão da semana anterior:\n' + (d.itens || d.mats.map(m => ({nome:m, tops:[]}))).map(it => it.nome + (it.tops.length ? '\n' + it.tops.map(t => '- ' + t).join('\n') : '')).join('\n'), 'Corrija o simulado item por item com o espelho e anote no caderno de erros o que perdeu. Depois revise as teses da semana com flashcards e evocação.'];
+        return [dia, `${d.nome}${d.reforco ? ' (reforço)' : ''}\n` + d.topicos.map(t => '- ' + t).join('\n') + `\nDia ${d.n} de ${d.total}`, d.passos.map(([t,h],i) => `${i+1}. ${t} (${fmtH(h)})`).join('\n')];
+      });
+      doc.autoTable({
+        startY: ty+3, margin:{left:M,right:M, top:16},
+        head: [['Dia','Atividade','Como fazer']],
+        body,
+        rowPageBreak:'avoid',
+        styles:{font:'helvetica', fontSize:8.6, cellPadding:2.2, textColor:NAVY, lineColor:[221,216,210], lineWidth:0.2, valign:'top'},
+        headStyles:{fillColor:BLUE, textColor:255, fontStyle:'bold'},
+        columnStyles:{0:{cellWidth:28, fontStyle:'bold'}, 1:{cellWidth:86}, 2:{cellWidth:'auto'}},
+        didParseCell: h => {
+          if(h.section !== 'body') return;
+          const d = w.days[h.row.index];
+          if(d.tipo === 'folga'){ h.cell.styles.textColor = MUTED; h.cell.styles.fillColor = [250,249,247]; }
+          if(d.tipo === 'simulado' || d.tipo === 'correcao'){ h.cell.styles.fillColor = [251,238,231]; }
+          if(d.tipo === 'revisao'){ h.cell.styles.fillColor = [236,239,247]; }
+          
+        }
+      });
+      y = doc.lastAutoTable.finalY + 10;
+    });
+
+    const pages = doc.getNumberOfPages();
+    for(let i=1;i<=pages;i++){
+      doc.setPage(i);
+      doc.setDrawColor(...SAND); doc.setLineWidth(0.3); doc.line(M, 287, PW-M, 287);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...MUTED);
+      doc.text('Master5 OAB · 2ª fase Trabalho' + (L.nome ? '  ·  Cronograma de ' + L.nome : ''), M, 291.5);
+      doc.text(`${i} / ${pages}`, PW-M, 291.5, {align:'right'});
+    }
+    doc.save(`cronograma-2fase-trabalho-${slug(L.nome)}.pdf`);
+  } catch(e){
+    console.error(e); alert('Algo deu errado ao gerar o PDF. Tente de novo.');
+  } finally {
+    btn.textContent = txt; btn.disabled = false;
+  }
+}
+
+try { if(window.self !== window.top) document.getElementById('iframeNotice').style.display = 'block'; } catch(e){ document.getElementById('iframeNotice').style.display = 'block'; }
+init();
+</script>
+</body>
+</html>
